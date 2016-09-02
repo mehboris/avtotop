@@ -1,0 +1,158 @@
+<!DOCTYPE>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Page title</title>
+    <meta name="description" content="Description of page">
+     <link href="css/bootstrap.css" rel="stylesheet">
+    
+
+    <!--<link href="css/bootstrap-responsive.css" rel="stylesheet">-->
+   <link rel="stylesheet" type="text/css" href="Sindex.css">  
+
+    <style>
+ .semilayer {
+    //padding: 5px; /* Поля вокруг текста */
+    background: #4c812b; /* Цвет фона */
+    margin: 0 auto; /* Выравниваем слой по центру */
+    width: 400px; /* Ширина слоя */
+    opacity: 0.6; /* Значение прозрачности */
+    filter: alpha(Opacity=70); /* Прозрачность в IE */
+    height:10px;
+    position: absolute;
+    top:8px;
+    left:8px;
+    z-index: 5;
+   }
+   .hor1{top:298;}
+   .verL{width: 10px;
+    height:300px; }
+   .verR{width: 10px;
+    height:300px;
+    left:398;}
+   #map{
+    width: 500px;
+    height: 500px;}
+  </style>
+</head>
+<body>
+  <!--<div class="semilayer"></div>
+  <div class="semilayer hor1"></div>
+  <div class="semilayer verL"></div>
+  <div class="semilayer verR"></div>-->
+  <div id="map">
+    
+    MAP</div>
+
+    <ul id="markers-with-index">
+       
+    </ul>
+    <button onclick="cleans()">fdfd</button>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://hpneo.github.io/gmaps/prettify/prettify.js"></script>
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="gmaps.js"></script>
+    <script>
+
+var map;
+
+// Update position
+$(document).on('submit', '.edit_marker', function(e) {
+  e.preventDefault();
+
+  var $index = $(this).data('marker-index');
+
+  $lat = $('#marker_' + $index + '_lat').val();
+  $lng = $('#marker_' + $index + '_lng').val();
+
+  var template = $('#edit_marker_template').text();
+
+  // Update form values
+  var content = template.replace(/{{index}}/g, $index).replace(/{{lat}}/g, $lat).replace(/{{lng}}/g, $lng);
+
+  map.markers[$index].setPosition(new google.maps.LatLng($lat, $lng));
+  map.markers[$index].infoWindow.setContent(content);
+
+  $marker = $('#markers-with-coordinates').find('li').eq(0).find('a');
+  $marker.data('marker-lat', $lat);
+  $marker.data('marker-lng', $lng);
+});
+
+// Update center
+$(document).on('click', '.pan-to-marker', function(e) {
+  e.preventDefault();
+
+  var lat, lng;
+
+  var $index = $(this).data('marker-index');
+  var $lat = $(this).data('marker-lat');
+  var $lng = $(this).data('marker-lng');
+
+  if ($index != undefined) {
+    // using indices
+    var position = map.markers[$index].getPosition();
+    lat = position.lat();
+    lng = position.lng();
+  }
+  else {
+    // using coordinates
+    lat = $lat;
+    lng = $lng;
+  }
+
+  map.setCenter(lat, lng);
+});
+
+$(document).ready(function(){
+  prettyPrint();
+  map = new GMaps({
+    div: '#map',
+    lat: -12.043333,
+    lng: -77.028333
+  });
+
+  GMaps.on('marker_added', map, function(marker) {
+    $('#markers-with-index').append('<li><a href="#" class="pan-to-marker" data-marker-index="' + map.markers.indexOf(marker) + '">' + marker.title + '</a></li>');
+
+    $('#markers-with-coordinates').append('<li><a href="#" class="pan-to-marker" data-marker-lat="' + marker.getPosition().lat() + '" data-marker-lng="' + marker.getPosition().lng() + '">' + marker.title + '</a></li>');
+  });
+
+  GMaps.on('click', map.map, function(event) {
+    var index = map.markers.length;
+    var lat = event.latLng.lat();
+    var lng = event.latLng.lng();
+
+    var template = $('#edit_marker_template').text();
+
+    var content = template.replace(/{{index}}/g, index).replace(/{{lat}}/g, lat).replace(/{{lng}}/g, lng);
+
+    map.addMarker({
+      lat: lat,
+      lng: lng,
+      title: 'Marker #' + index,
+      infoWindow: {
+        content : content
+      }
+    });
+  });
+});
+
+
+    </script>
+    <script type="text/html" id="edit_marker_template">
+    <h4>Edit Marker</h4>
+    <form class="edit_marker" action="#" method="post" data-marker-index="{{index}}">
+      <p>
+        <label for="marker_{{index}}_lat">Latitude:</label>
+        <input type="text" id="marker_{{index}}_lat" value="{{lat}}" />
+      </p>
+      <p>
+        <label for="marker_{{index}}_lng">Longitude:</label>
+        <input type="text" id="marker_{{index}}_lng" value="{{lng}}" />
+      </p>
+      <input type="submit" value="Update position" />
+    </form>
+  </script>
+  
+</body>
+</html>

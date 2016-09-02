@@ -1,0 +1,9 @@
+{"titl":[
+{
+	"name":"MuscleGarage",  "lat":"48.469333", "lng":"35.048333", "icon":"icon/repair.png", "content":"<img src='img/MG.jpg'><h3>MuscleGarage <button onclick='preview()'> >></button> </h3><button onclick='way(0)'>GO!</button>"
+},
+{
+	"name":"VDavidich", "image":"/img/VDavidich.jpg", "lat":"48.465658", "lng":"35.050200", "icon":"icon/repair.png", "content":"<img src='img/VDavidich.jpg'><h3>VDavidich</h3><button onclick='preview()'> >></button><button onclick='way(1)'>GO!</button>"
+}
+]
+}

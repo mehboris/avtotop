@@ -1,0 +1,150 @@
+﻿<!DOCTYPE>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Page title</title>
+    <meta name="description" content="Description of page">
+    <style>
+ .semilayer {
+    //padding: 5px; /* Поля вокруг текста */
+    background: #4c812b; /* Цвет фона */
+    margin: 0 auto; /* Выравниваем слой по центру */
+    width: 400px; /* Ширина слоя */
+    opacity: 0.6; /* Значение прозрачности */
+    filter: alpha(Opacity=70); /* Прозрачность в IE */
+    height:10px;
+    position: absolute;
+    top:8px;
+    left:8px;
+    z-index: 5;
+   }
+   .hor1{top:298;}
+   .verL{width: 10px;
+   	height:300px; }
+   .verR{width: 10px;
+   	height:300px;
+   	left:398;}
+   #id{z-index: 6;}
+  </style>
+</head>
+<body>
+	<!--<div class="semilayer"></div>
+	<div class="semilayer hor1"></div>
+	<div class="semilayer verL"></div>
+	<div class="semilayer verR"></div>-->
+	<div id="map">
+		
+		MAP</div>
+    <button onclick="LoadObjects()">fdfd</button>
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="gmaps.js"></script>
+    <script>
+
+    function LoadObjects() {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'Objects.json', false);
+      xhr.send();
+    
+
+      if (xhr.status != 200) {
+        // обработать ошибку
+        alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+      } else {
+    var contentType = xhr.getResponseHeader('Content-Type');
+    alert(contentType);
+        // вывести результат
+        alert(xhr.responseText);
+        var Objects=JSON.parse(xhr.responseText);
+        alert(Objects.length);
+
+      }
+    }
+  
+
+
+        var map = new GMaps({
+          div: "#map",
+          lat: 48.469,
+          lng: 35.048,
+          width: 800,
+          height: 800,
+          zoom:7,
+        });
+
+    map.addMarker({
+  lat: 48.469333,
+  lng: 35.048333,
+  title: 'MuscleGarage',
+  icon: 'icon/repair.png',
+   infoWindow: {
+    content: '<img src="img/MG.jpg"><h3>MuscleGarage</h3><button onclick="MuscleGarage_Marsh()">GO!</button>'
+}
+
+});
+
+  var path = [[48.45095176, 35.07177114], [48.45553427, 35.07486105], [48.46020174, 35.07520437], [48.46148238, 35.07614851],[48.46461268, 35.07224321],[48.46569401, 35.06722212],[48.46705987, 35.06134272],[48.47232378, 35.04237413],[48.47696126, 35.03413439],[48.47960699, 35.02636671],[48.47380327, 35.02392054],[48.47243759, 35.03082991]];
+
+polygon = map.drawPolygon({
+  paths: path, // pre-defined polygon shape
+  strokeColor: '#BBD8E9',
+  strokeOpacity: 1,
+  strokeWeight: 3,
+  fillColor: '#BBD8E9',
+  fillOpacity: 0.6  
+});
+
+  GMaps.geolocate({
+          success: function(position) {
+            map.setCenter(position.coords.latitude, position.coords.longitude);
+              map.addMarker({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                  title: 'Lima',
+                  infoWindow: {
+                      content: '<p>You are here!</p>'
+                    }
+            });
+          },
+          error: function(error) {
+            alert('Geolocation failed: '+error.message);
+          },
+          not_supported: function() {
+            alert("Your browser does not support geolocation");
+          }
+      });
+function MuscleGarage_Marsh() {
+GMaps.geolocate({
+          success: function(position) {
+            map.setCenter(position.coords.latitude, position.coords.longitude);
+              map.addMarker({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                  title: 'Lima',
+                  infoWindow: {
+                      content: '<p>You are here!</p>'
+                    }
+             });
+              map.drawRoute({
+                origin: [position.coords.latitude, position.coords.longitude],
+                destination: [48.469333, 35.048333],
+                travelMode: 'driving',
+                strokeColor: '#00E600',
+                strokeOpacity: 0.6,
+                strokeWeight: 6
+              });
+          },
+          error: function(error) {
+            alert('Geolocation failed: '+error.message);
+          },
+          not_supported: function() {
+            alert("Your browser does not support geolocation");
+          }
+      });
+
+}
+
+    </script>
+	
+</body>
+</html>

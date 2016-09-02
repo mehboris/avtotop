@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Auto fan and event">
+    <meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+
+    <style>
+
+     
+    </style>
+      <link href="css/bootstrap.css" rel="stylesheet">
+    
+
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="Sindex.css">  
+
+
+  </head>
+
+  <body>
+  
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+     <!-- </div>
+    </nav>-->
+
+
+  <!-- <div class="navbar navbar-inverse navbar-fixed-top">
+     <div class="navbar-inner">
+       <a class="brand" href="#">Title</a>
+       <ul class="nav">
+         <li class="active"><a href="#">Home</a></li>
+         <li><a href="#">Link</a></li>
+         <li><a href="#">Link</a></li>
+      </ul>
+     </div>
+  </div>-->
+
+        
+
+
+  <div class="container-fluid ">
+
+      <header>
+        
+          <h1>
+              <a class ="logo" href="#home"></a>
+          </h1>
+          <ul class="head_ul">
+            
+            
+            <li class="head_li"><a class="head_a" href="#contact">Контакти</a></li>
+          </ul>
+      </header>
+
+
+     <div class="row-fluid">
+                <div class="under_header col-md-12" id="zm_b">
+                    <div class="Text1">Be on <span class="light H">AVTOTOP</span>
+                    </div>
+                    <ul class="menu" id="menu">
+                        <li class="menu_li" onMousemove="backg(1)"><a class="menu_a"  href="#map">КАРТА<br>Отримай маршут</a>
+                        <li class="menu_li" onMousemove="backg(2)"><a class="menu_a"  href="#map">ПОДІЇ<br>Підвищуй SKILL</a>
+                        <li class="menu_li" onMousemove="backg(3)"><a class="menu_a"  href="#map">СЕРВІС<br>Будь у формі</a>
+                    </ul>
+                </div>
+    </div>         
+
+    <footer>
+     
+      <ul class="foot_ul">
+          <li class="foot_li"><a href="#facebook">Facebook</a>
+          <li class="foot_li"><a href="#youtube">Youtube</a>
+          <li class="foot_li"><a href="#twitter">Twitter</a>
+          <li class="foot_li"><a href="#vk">VK</a>
+      </ul>
+    </div>
+    </footer>
+     
+    </div>
+  <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  </body>
+  <script>
+  var elem = document.getElementById('zm_b');
+ 
+  function backg(n){
+    
+    switch(n){
+      case 1:elem.style.backgroundImage="url(imag/fon.jpeg)";  elem.style.backgroundPosition="66.5% 0%"; elem.style.backgroundSize="410% 125%"; break;
+      case 2:elem.style.backgroundImage="url(imag/fon.jpeg)"; elem.style.backgroundPosition="0% 0%"; elem.style.backgroundSize="410% 125%"; break;
+      case 3:elem.style.backgroundImage="url(imag/fon.jpeg)"; elem.style.backgroundPosition="99.5% 0%"; elem.style.backgroundSize="410% 125%"; break;
+     
+
+    }
+    //setTimeout(function () {elem.style.background="url(imag/GTR1.jpg) no-repeat"}, 100);
+  }
+
+  elem.addEventListener("mouseover",  function () {elem.style.backgroundImage="url(imag/fon.jpeg)";
+                                                    elem.style.backgroundPosition="33% 0%";
+                                                     elem.style.backgroundSize="410% 125%";});
+
+  </script>
+</html>
